@@ -1,0 +1,108 @@
+html,
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cards,
+.board,
+.hand {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 20px 0;
+  min-height: 180px;
+  align-items: center;
+}
+
+.game-area {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.card {
+  width: 200px;
+  height: 280px;
+  padding: 16px;
+  border-radius: 12px;
+  background: white;
+  border: 2px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card-header {
+  flex: 0 0 auto;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-footer {
+  flex: 0 0 auto;
+}
+
+.name {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+}
+
+.area {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contribuicao {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #444;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card--draggable {
+  cursor: grab;
+  background: #fdfbf7;
+}
+
+.card--draggable:active {
+  cursor: grabbing;
+}
+
+.card--dragging {
+  opacity: 0.5;
+  transform: scale(1.05);
+}
+
+.year {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.year-hidden {
+  color: #aaa;
+  font-style: italic;
+}
+
+.win-message {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  font-weight: bold;
+  text-align: center;
+}

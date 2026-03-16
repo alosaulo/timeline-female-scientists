@@ -1,0 +1,51 @@
+numero,nome,ano,area,contribuicao
+1,Bertha Lutz,1919,Biologia,Ingressou no Museu Nacional; pioneira na botânica e no voto feminino.
+2,Nise da Silveira,1926,Psiquiatria,Única mulher a se formar em medicina em sua turma (pioneira na terapia ocupacional).
+3,Maria José Deane,1936,Parasitologia,Iniciou expedições essenciais para o controle da malária e leishmaniose no Brasil.
+4,Heloísa Alberto Torres,1937,Antropologia,Primeira mulher a assumir a direção do Museu Nacional (UFRJ).
+5,Enedina Alves Marques,1945,Engenharia,Primeira engenheira negra do país; trabalhou no Plano Elétrico do Paraná.
+6,Graziela Barroso,1946,Botânica,Primeira pesquisadora do Jardim Botânico do RJ; maior catalogadora de plantas.
+7,Elisa Frota Pessoa,1949,Física,Uma das fundadoras do Centro Brasileiro de Pesquisas Físicas (CBPF).
+8,Marília Chaves Peixoto,1950,Matemática,Primeira brasileira eleita para a Academia Brasileira de Ciências.
+9,Alice Piffer Canabrava,1951,Economia,Primeira professora catedrática da USP; fundou a disciplina de História Econômica.
+10,Sonja Ashauer,1954,Física,Segunda brasileira doutora em física com tese orientada por Paul Dirac.
+11,Johanna Döbereiner,1961,Agronomia,Descobriu a fixação biológica de nitrogênio base da soja sustentável no Brasil.
+12,Carolina Bori,1962,Psicologia,Liderou a luta pela regulamentação da profissão de psicólogo no país.
+13,Maria Isaura de Queiroz,1965,Sociologia,Publicou estudos clássicos sobre o messianismo e sociologia rural.
+14,Ruth Nussenzweig,1967,Imunologia,Descobriu o antígeno que viabilizou a primeira vacina contra a malária.
+15,Virginia Bicudo,1970,Sociologia,Primeira psicanalista não-médica e pioneira nos estudos raciais no Brasil.
+16,Niède Guidon,1973,Arqueologia,Iniciou escavações no Piauí que provaram presença humana muito antiga na América.
+17,Lélia Gonzalez,1975,Antropologia,Referência no feminismo negro e cofundadora do Movimento Negro Unificado.
+18,Berta Ribeiro,1976,Etnologia,Especialista em tecnologia indígena; publicou A Arte do Trançado.
+19,Mayana Zatz,1981,Genética,Criou o Centro de Assistência a Doenças Musculares referência mundial.
+20,Rosaly Lopes,1985,Astronomia,Entrou para a NASA; descobriu o maior número de vulcões ativos em Io (Júpiter).
+21,Yvonne Mascarenhas,1986,Física,Pioneira da cristalografia de raios-X no Brasil; fundou laboratório na USP.
+22,Angelita Habr-Gama,1991,Medicina,Cirurgiã reconhecida internacionalmente pelo tratamento conservador de câncer.
+23,Lucile Moerbeck,1992,Botânica,Contribuiu massivamente para o inventário da flora da Mata Atlântica.
+24,Nadja Lapa,1995,Física,Destacou-se em pesquisas sobre fusão nuclear e física de plasmas.
+25,Duilia de Mello,1997,Astronomia,Descobriu a supernova 1997D e as bolhas azuis (berçários de estrelas).
+26,Glaci Zancan,1999,Bioquímica,Primeira mulher a presidir a Sociedade Brasileira para o Progresso da Ciência.
+27,Marta Canfield,2000,Astronomia,Liderou importantes projetos de rádioastronomia no Observatório de Itapetinga.
+28,Thaisa Bergmann,2003,Astrofísica,Provou que buracos negros supermassivos são componentes comuns de galáxias.
+29,Marcia Barbosa,2004,Física,Explicou o comportamento anômalo da água; prêmio L'Oréal-UNESCO.
+30,Suzana Herculano-Houzel,2005,Neurociência,Criou o método de sopa de cérebro para contar neurônios com precisão.
+31,Viviane Barbosa,2006,Eng. Química,Desenvolveu filtros catalíticos para reduzir poluição (prêmio internacional).
+32,Vanderlan Bolzani,2008,Química,Referência em biodiversidade brasileira e química de produtos naturais.
+33,Helena Nader,2009,Biomedicina,Essencial no estudo da heparina (anticoagulante); presidente da ABC.
+34,Fernanda De Felice,2011,Neurociência,Descobriu a conexão metabólica entre diabetes e Alzheimer.
+35,Alicia Kowaltowski,2012,Bioquímica,Especialista em bioenergética e como a dieta afeta o envelhecimento celular.
+36,Adriana Neumann,2013,Matemática,Pesquisadora de destaque em probabilidade e modelos estocásticos.
+37,Zélia Ludwig,2014,Física,Atua em novos materiais e divulgação científica em comunidades periféricas.
+38,Marcelle Soares-Santos,2015,Física,Co-liderou a detecção de luz vinda de colisão de estrelas de nêutrons.
+39,Celina Turchi,2016,Epidemiologia,Descobriu a relação entre o vírus Zika e a microcefalia em bebês.
+40,Tatiana Roque,2017,Matemática,Autora de obras fundamentais sobre a história da matemática no Brasil.
+41,Ana Tereza Vasconcelos,2018,Bioinformática,Lidera o mapeamento genético da fauna e flora brasileira no LNCC.
+42,Débora Foguel,2019,Bioquímica,Pesquisa sobre proteínas que causam doenças como o Parkinson.
+43,Jaqueline Goes,2020,Biomedicina,Liderou o sequenciamento do genoma do coronavírus em apenas 48h.
+44,Ester Sabino,2020,Medicina,Referência em segurança transfusional e vigilância genômica de vírus.
+45,Maria Aparecida Bento,2021,Psicologia,Atua no combate ao racismo institucional; referência em psicologia social.
+46,Sônia Guimarães,2022,Física,Primeira doutora negra em física no Brasil; professora titular do ITA.
+47,Eliete Bouskela,2023,Medicina,Primeira mulher a presidir a Academia Nacional de Medicina em 194 anos.
+48,Nathalia Christie,2024,Ciência Comput.,Desenvolveu IA para detecção precoce de doenças degenerativas.
+49,Isabela Gomes,2025,Biotecnologia,Criou polímero biodegradável a partir de biomassa descartada (café).
+50,Cientista da SNCT,2026,Todas,Representação simbólica de todas as mulheres na ciência no ano deste tema.
