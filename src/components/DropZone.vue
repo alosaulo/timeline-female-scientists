@@ -17,32 +17,57 @@ const { isDropTarget } = useDroppable({
 
 <template>
   <div ref="element" :class="['drop-zone', { 'is-active': isDropTarget }]">
-    <div class="drop-indicator"></div>
+    <div class="ghost-card" aria-hidden="true">
+      <span class="ghost-plus">+</span>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .drop-zone {
-  width: 60px;
-  min-height: 200px;
-  align-self: stretch;
+  flex: 0 0 200px;
+  width: 200px;
+  height: 280px;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  transition: transform 0.2s ease;
+}
+
+.ghost-card {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(91, 122, 142, 0.3);
+  border-radius: 12px;
+  background: rgba(239, 244, 248, 0.7);
+  opacity: 0.8;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.2s ease;
+  pointer-events: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-.drop-indicator {
-  width: 4px;
-  height: 80%;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  transition: background-color 0.2s;
+.ghost-plus {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 400;
+  color: rgba(91, 122, 142, 0.6);
 }
 
-.drop-zone.is-active .drop-indicator {
-  background-color: #4caf50;
-  width: 8px;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+.drop-zone.is-active {
+  transform: translateY(-2px);
+}
+
+.drop-zone.is-active .ghost-card {
+  opacity: 1;
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.16);
+  transform: scale(1.01);
+}
+
+.drop-zone.is-active .ghost-plus {
+  color: #2e7d32;
 }
 </style>
