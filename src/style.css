@@ -1,23 +1,80 @@
-html,
-body {
+:root {
+  --page-gutter: clamp(12px, 3vw, 32px);
+  --section-gap: clamp(20px, 4vw, 40px);
+  --card-gap: clamp(8px, 1.4vw, 12px);
+  --card-width: clamp(136px, 18vw, 200px);
+  --card-height: clamp(252px, 32vw, 360px);
+}
+
+html {
+  box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef2ff 0%, #f9fbff 100%);
+  color: #1f2240;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+main {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: var(--page-gutter);
+}
+
+main > h1 {
+  margin: 0 0 clamp(20px, 3vw, 32px);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.1;
+}
+
+section h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
 }
 
 .cards,
 .board,
 .hand {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 20px 0;
-  min-height: 180px;
-  align-items: center;
+  gap: var(--card-gap);
+  padding: clamp(12px, 2vw, 20px) 0;
+  min-height: calc(var(--card-height) + 24px);
+}
+
+.cards,
+.hand {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  overflow: visible;
 }
 
 .board {
   position: relative;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: clamp(16px, 2vw, 24px);
   cursor: grab;
   user-select: none;
+  scroll-snap-type: x proximity;
+}
+
+.board > * {
+  scroll-snap-align: start;
 }
 
 .board--panning {
@@ -27,7 +84,13 @@ body {
 .game-area {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: var(--section-gap);
+}
+
+.score-section,
+.timeline-section,
+.hand-section {
+  width: 100%;
 }
 
 .score-section h2 {
@@ -38,16 +101,17 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 20px;
-  padding: 12px 16px;
-  border: 1px solid #d6d6d6;
-  border-radius: 12px;
-  background: #f8f8f8;
+  padding: clamp(12px, 2vw, 16px);
+  border: 1px solid #d6d6f0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
 }
 
 .score-board p {
   margin: 0;
   color: #333;
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
 }
 
 .score-main {
@@ -55,16 +119,17 @@ body {
 }
 
 .card {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 300px;
+  flex: 0 0 var(--card-width);
+  width: var(--card-width);
+  min-height: var(--card-height);
+  height: auto;
   padding: 16px;
   border-radius: 12px;
   background: white;
   border: 2px solid #ddd;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: stretch;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -137,8 +202,36 @@ body {
 }
 
 .win-message {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
   color: #2e7d32;
   font-weight: bold;
   text-align: center;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --card-width: clamp(128px, 31vw, 168px);
+    --card-height: clamp(236px, 58vw, 320px);
+  }
+
+  .score-board {
+    gap: 10px 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --card-width: clamp(124px, 42vw, 150px);
+    --card-height: clamp(228px, 72vw, 290px);
+  }
+
+  main > h1,
+  section h2 {
+    text-align: center;
+  }
+
+  .score-board {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

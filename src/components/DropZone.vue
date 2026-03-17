@@ -25,9 +25,9 @@ const { isDropTarget } = useDroppable({
 
 <style scoped>
 .drop-zone {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 280px;
+  flex: 0 0 var(--card-width);
+  width: var(--card-width);
+  min-height: var(--card-height);
   display: flex;
   justify-content: stretch;
   align-items: stretch;
@@ -37,9 +37,9 @@ const { isDropTarget } = useDroppable({
 .ghost-card {
   width: 100%;
   height: 100%;
-  border: 2px dashed rgba(91, 122, 142, 0.3);
-  border-radius: 12px;
-  background: rgba(239, 244, 248, 0.7);
+  border: 2px dashed rgba(92, 118, 222, 0.45);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(214, 223, 255, 0.72) 0%, rgba(188, 201, 255, 0.78) 100%);
   opacity: 0.8;
   display: flex;
   justify-content: center;
@@ -52,8 +52,8 @@ const { isDropTarget } = useDroppable({
 .ghost-plus {
   font-size: 2rem;
   line-height: 1;
-  font-weight: 400;
-  color: rgba(91, 122, 142, 0.6);
+  font-weight: 700;
+  color: rgba(44, 58, 156, 0.55);
 }
 
 .drop-zone.is-active {
@@ -62,12 +62,12 @@ const { isDropTarget } = useDroppable({
 
 .drop-zone.is-active .ghost-card {
   opacity: 1;
-  border-color: #4caf50;
-  background: rgba(76, 175, 80, 0.16);
+  border-color: #4669ec;
+  background: linear-gradient(180deg, rgba(162, 183, 255, 0.8) 0%, rgba(128, 154, 247, 0.85) 100%);
   transform: scale(1.01);
 }
 
 .drop-zone.is-active .ghost-plus {
-  color: #2e7d32;
+  color: #ffffff;
 }
 </style>
