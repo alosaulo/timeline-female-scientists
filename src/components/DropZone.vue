@@ -25,8 +25,8 @@ const { isDropTarget } = useDroppable({
 
 <style scoped>
 .drop-zone {
-  flex: 0 0 var(--card-width);
-  width: var(--card-width);
+  flex: 0 0 30px;
+  width: 30px;
   min-height: var(--card-height);
   display: flex;
   justify-content: stretch;
@@ -45,7 +45,10 @@ const { isDropTarget } = useDroppable({
   justify-content: center;
   align-items: center;
   pointer-events: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease,
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease,
     transform 0.2s ease;
 }
 
@@ -57,7 +60,8 @@ const { isDropTarget } = useDroppable({
 }
 
 .drop-zone.is-active {
-  transform: translateY(-2px);
+  width: var(--card-width);
+  flex: 0 0 var(--card-width);
 }
 
 .drop-zone.is-active .ghost-card {

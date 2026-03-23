@@ -54,6 +54,10 @@ section h2 {
   min-height: calc(var(--card-height) + 24px);
 }
 
+.board {
+  justify-content: center;
+}
+
 .cards,
 .hand {
   flex-wrap: wrap;
