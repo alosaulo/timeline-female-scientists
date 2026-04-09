@@ -4,6 +4,7 @@ import { useDroppable } from '@dnd-kit/vue'
 
 const props = defineProps<{
   index: number
+  compact?: boolean
 }>()
 
 const element = ref<HTMLElement | null>(null)
@@ -16,7 +17,10 @@ const { isDropTarget } = useDroppable({
 </script>
 
 <template>
-  <div ref="element" :class="['drop-zone', { 'is-active': isDropTarget }]">
+  <div
+    ref="element"
+    :class="['drop-zone', { 'drop-zone--compact': compact, 'is-active': isDropTarget }]"
+  >
     <div class="ghost-card" aria-hidden="true">
       <span class="ghost-plus">+</span>
     </div>
@@ -25,13 +29,20 @@ const { isDropTarget } = useDroppable({
 
 <style scoped>
 .drop-zone {
-  flex: 0 0 30px;
-  width: 30px;
+  flex: 0 0 var(--drop-zone-width);
+  width: var(--drop-zone-width);
+  height: var(--card-height);
   min-height: var(--card-height);
   display: flex;
   justify-content: stretch;
   align-items: stretch;
   transition: transform 0.2s ease;
+}
+
+.drop-zone--compact {
+  --card-height: var(--timeline-card-height);
+  --card-width: var(--timeline-card-width);
+  --drop-zone-width: var(--timeline-drop-zone-width);
 }
 
 .ghost-card {
@@ -53,7 +64,7 @@ const { isDropTarget } = useDroppable({
 }
 
 .ghost-plus {
-  font-size: 2rem;
+  font-size: clamp(0.9rem, calc(var(--card-width) * 0.22), 2rem);
   line-height: 1;
   font-weight: 700;
   color: rgba(44, 58, 156, 0.55);

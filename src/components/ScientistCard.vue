@@ -16,10 +16,12 @@ const props = withDefaults(
     card: ScientistCardData
     showYear?: boolean
     draggable?: boolean
+    compact?: boolean
   }>(),
   {
     showYear: true,
     draggable: false,
+    compact: false,
   },
 )
 
@@ -42,15 +44,42 @@ const illustrationFallback = computed(() =>
     .map((name) => name[0]?.toUpperCase() ?? '')
     .join(''),
 )
+
+function getTextClass(
+  prefix: string,
+  text: string | undefined,
+  thresholds: [number, number, number],
+) {
+  const length = text?.trim().length ?? 0
+
+  if (length > thresholds[2]) return `${prefix}--xxlong`
+  if (length > thresholds[1]) return `${prefix}--xlong`
+  if (length > thresholds[0]) return `${prefix}--long`
+
+  return ''
+}
+
+const nameClass = computed(() => getTextClass('name', props.card.nome, [18, 26, 34]))
+const areaClass = computed(() => getTextClass('area', props.card.area, [16, 24, 32]))
+const contributionClass = computed(() =>
+  getTextClass('contribuicao', props.card.contribuicao, [40, 55, 70]),
+)
 </script>
 
 <template>
   <div
     ref="element"
-    :class="['card', { 'card--dragging': isDragging, 'card--draggable': draggable }]"
+    :class="[
+      'card',
+      {
+        'card--compact': compact,
+        'card--dragging': isDragging,
+        'card--draggable': draggable,
+      },
+    ]"
   >
     <header class="card-header">
-      <h3 class="name">{{ card.nome }}</h3>
+      <h3 :class="['name', nameClass]">{{ card.nome }}</h3>
     </header>
 
     <div class="card-illustration">
@@ -69,8 +98,10 @@ const illustrationFallback = computed(() =>
     <p class="card-section-title">Area de atuacao</p>
 
     <div class="card-body">
-      <p v-if="card.area" class="area">{{ card.area }}</p>
-      <p v-if="card.contribuicao" class="contribuicao">{{ card.contribuicao }}</p>
+      <p v-if="card.area" :class="['area', areaClass]">{{ card.area }}</p>
+      <p v-if="card.contribuicao" :class="['contribuicao', contributionClass]">
+        {{ card.contribuicao }}
+      </p>
       <p v-if="!hasDescription" class="contribuicao contribuicao--empty">
         Informacoes em atualizacao.
       </p>
@@ -91,9 +122,9 @@ const illustrationFallback = computed(() =>
   --card-ribbon-shadow: #b73d78;
   --card-text: #1f2240;
   --card-shadow: rgba(19, 35, 112, 0.18);
-  --card-inner-gap: clamp(6px, 0.9vw, 8px);
-  --card-edge-padding: clamp(4px, 0.8vw, 6px);
-  --card-bottom-padding: clamp(10px, 1.6vw, 12px);
+  --card-inner-gap: clamp(3px, calc(var(--card-height) * 0.02), 8px);
+  --card-edge-padding: clamp(3px, calc(var(--card-width) * 0.04), 6px);
+  --card-bottom-padding: clamp(6px, calc(var(--card-height) * 0.06), 12px);
 
   flex: 0 0 var(--card-width);
   display: flex;
@@ -101,17 +132,22 @@ const illustrationFallback = computed(() =>
   justify-content: flex-start;
   align-items: stretch;
   width: var(--card-width);
-  height: auto;
-  min-height: var(--card-height);
+  height: var(--card-height);
+  min-height: 0;
   padding: var(--card-edge-padding) var(--card-edge-padding) var(--card-bottom-padding);
   border: 3px solid var(--card-frame);
   border-radius: 4px;
   background: linear-gradient(180deg, #b1c3ff 0%, #8da5ff 100%);
-  box-shadow: 0 10px 20px var(--card-shadow);
+  box-shadow: 0 6px 14px var(--card-shadow);
   gap: var(--card-inner-gap);
   text-align: center;
   transition: transform 0.2s;
-  overflow: visible;
+  overflow: hidden;
+}
+
+.card--compact {
+  --card-height: var(--timeline-card-height);
+  --card-width: var(--timeline-card-width);
 }
 
 .card--draggable {
@@ -122,7 +158,8 @@ const illustrationFallback = computed(() =>
 .card-header,
 .card-section-title {
   margin: 0;
-  padding: clamp(3px, 0.7vw, 4px) clamp(6px, 1vw, 8px);
+  padding: clamp(2px, calc(var(--card-height) * 0.012), 4px)
+    clamp(4px, calc(var(--card-width) * 0.065), 8px);
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: linear-gradient(180deg, #2d34ec 0%, var(--card-blue-dark) 100%);
   color: #fff;
@@ -133,22 +170,37 @@ const illustrationFallback = computed(() =>
 }
 
 .card-header {
-  min-height: 26px;
+  min-height: clamp(24px, calc(var(--card-height) * 0.14), 44px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .name {
+  --name-font-size: clamp(0.62rem, calc(var(--card-width) * 0.1), 1rem);
+
   margin: 0;
   font-family: 'Arial Narrow', 'Franklin Gothic Heavy', sans-serif;
-  font-size: clamp(0.62rem, 1vw, 0.75rem);
-  line-height: 1.05;
+  font-size: var(--name-font-size);
+  line-height: 1.02;
   display: -webkit-box;
   line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-wrap: balance;
+}
+
+.name--long {
+  --name-font-size: clamp(0.56rem, calc(var(--card-width) * 0.092), 0.92rem);
+}
+
+.name--xlong {
+  --name-font-size: clamp(0.5rem, calc(var(--card-width) * 0.084), 0.84rem);
+}
+
+.name--xxlong {
+  --name-font-size: clamp(0.46rem, calc(var(--card-width) * 0.078), 0.78rem);
 }
 
 .card-illustration {
@@ -158,23 +210,28 @@ const illustrationFallback = computed(() =>
 .card-illustration__frame {
   position: relative;
   width: 100%;
-  min-height: clamp(110px, calc(var(--card-height) * 0.37), 146px);
+  height: calc(var(--card-height) * 0.28);
+  min-height: 0;
   border: 2px solid var(--card-frame);
   background: var(--card-surface);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(8px, 1.2vw, 12px) clamp(8px, 1vw, 10px);
+  padding: clamp(4px, calc(var(--card-width) * 0.05), 10px);
   isolation: isolate;
+}
+
+.card--compact .card-illustration__frame {
+  height: calc(var(--card-height) * 0.34);
 }
 
 .card-illustration__backdrop {
   position: absolute;
-  top: clamp(10px, 1.4vw, 14px);
+  top: clamp(6px, calc(var(--card-height) * 0.05), 14px);
   left: 50%;
-  width: clamp(90px, calc(var(--card-width) * 0.62), 122px);
-  height: clamp(90px, calc(var(--card-width) * 0.62), 122px);
+  width: clamp(38px, calc(var(--card-width) * 0.62), 122px);
+  height: clamp(38px, calc(var(--card-width) * 0.62), 122px);
   border-radius: 999px;
   background: #6c87ea;
   transform: translateX(-50%);
@@ -183,14 +240,14 @@ const illustrationFallback = computed(() =>
 
 .card-ornament {
   position: absolute;
-  width: clamp(42px, calc(var(--card-width) * 0.31), 62px);
-  height: clamp(42px, calc(var(--card-width) * 0.31), 62px);
+  width: clamp(20px, calc(var(--card-width) * 0.31), 62px);
+  height: clamp(20px, calc(var(--card-width) * 0.31), 62px);
   opacity: 0.88;
   background:
     radial-gradient(circle at center, #ffffff 0 42%, transparent 43%) 0 0 / 18px 18px,
     radial-gradient(circle at center, #ffffff 0 42%, transparent 43%) 9px 9px / 18px 18px,
-    radial-gradient(circle at center, rgba(124, 147, 241, 0.8) 0 28%, transparent 29%) 0 0 /
-      18px 18px,
+    radial-gradient(circle at center, rgba(124, 147, 241, 0.8) 0 28%, transparent 29%) 0 0 / 18px
+      18px,
     radial-gradient(circle at center, rgba(124, 147, 241, 0.8) 0 28%, transparent 29%) 9px 9px /
       18px 18px;
   background-repeat: repeat;
@@ -198,23 +255,23 @@ const illustrationFallback = computed(() =>
 }
 
 .card-ornament--top {
-  top: -12px;
-  right: -12px;
+  top: -8px;
+  right: -8px;
   transform: rotate(180deg);
 }
 
 .card-ornament--bottom {
-  bottom: -12px;
-  left: -12px;
+  bottom: -8px;
+  left: -8px;
 }
 
 .ilustracao {
   position: relative;
-  width: clamp(88px, calc(var(--card-width) * 0.64), 126px);
-  height: clamp(88px, calc(var(--card-width) * 0.64), 126px);
+  width: clamp(34px, calc(var(--card-height) * 0.24), 126px);
+  height: clamp(34px, calc(var(--card-height) * 0.24), 126px);
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 6px 8px rgba(27, 42, 114, 0.12));
+  filter: drop-shadow(0 4px 6px rgba(27, 42, 114, 0.12));
   z-index: 1;
 }
 
@@ -224,58 +281,139 @@ const illustrationFallback = computed(() =>
   background: #ffffff;
   color: var(--card-blue-dark);
   font-family: 'Arial Black', 'Impact', sans-serif;
-  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  font-size: clamp(0.72rem, calc(var(--card-width) * 0.16), 1.4rem);
   align-items: center;
   justify-content: center;
 }
 
 .card-section-title {
+  min-height: clamp(16px, calc(var(--card-height) * 0.06), 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
-  font-size: clamp(0.58rem, 0.85vw, 0.7rem);
+  font-size: clamp(0.44rem, calc(var(--card-width) * 0.072), 0.74rem);
   line-height: 1;
 }
 
 .card-body {
   flex: 1 1 auto;
-  min-height: clamp(84px, calc(var(--card-height) * 0.28), 102px);
+  min-height: 0;
   margin: 0;
-  padding: clamp(8px, 1.2vw, 12px) clamp(8px, 1.2vw, 12px) clamp(10px, 1.4vw, 14px);
+  padding: clamp(4px, calc(var(--card-width) * 0.05), 12px)
+    clamp(4px, calc(var(--card-width) * 0.05), 12px)
+    clamp(6px, calc(var(--card-height) * 0.05), 14px);
   border: 2px solid rgba(122, 146, 240, 0.28);
   background: rgba(255, 255, 255, 0.98);
   color: var(--card-text);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: start;
   align-items: stretch;
-  gap: clamp(6px, 0.8vw, 8px);
+  gap: clamp(3px, calc(var(--card-height) * 0.014), 8px);
 }
 
 .area {
+  --area-font-size: clamp(0.58rem, calc(var(--card-width) * 0.082), 0.9rem);
+
   margin: 0;
   color: #2434b6;
-  font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+  font-size: var(--area-font-size);
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.15;
+  min-height: 1.15em;
   display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-wrap: balance;
+}
+
+.area--long {
+  --area-font-size: clamp(0.54rem, calc(var(--card-width) * 0.076), 0.82rem);
+}
+
+.area--xlong {
+  --area-font-size: clamp(0.48rem, calc(var(--card-width) * 0.07), 0.76rem);
+}
+
+.area--xxlong {
+  --area-font-size: clamp(0.42rem, calc(var(--card-width) * 0.066), 0.7rem);
 }
 
 .contribuicao {
+  --contribuicao-font-size: clamp(0.5rem, calc(var(--card-width) * 0.068), 0.82rem);
+
   margin: 0;
   color: #1f2240;
-  font-size: clamp(0.66rem, 0.9vw, 0.76rem);
-  line-height: 1.22;
+  font-size: var(--contribuicao-font-size);
+  line-height: 1.16;
   text-align: center;
   display: -webkit-box;
-  line-clamp: 5;
-  -webkit-line-clamp: 5;
+  line-clamp: 6;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
+.contribuicao--long {
+  --contribuicao-font-size: clamp(0.47rem, calc(var(--card-width) * 0.064), 0.76rem);
+}
+
+.contribuicao--xlong {
+  --contribuicao-font-size: clamp(0.44rem, calc(var(--card-width) * 0.06), 0.68rem);
+}
+
+.contribuicao--xxlong {
+  --contribuicao-font-size: clamp(0.4rem, calc(var(--card-width) * 0.056), 0.62rem);
+  line-clamp: 7;
+  -webkit-line-clamp: 7;
+}
+
+.card--compact .name {
+  --name-font-size: clamp(0.44rem, calc(var(--card-width) * 0.084), 0.74rem);
+}
+
+.card--compact .name--long {
+  --name-font-size: clamp(0.4rem, calc(var(--card-width) * 0.078), 0.68rem);
+}
+
+.card--compact .name--xlong,
+.card--compact .name--xxlong {
+  --name-font-size: clamp(0.36rem, calc(var(--card-width) * 0.072), 0.62rem);
+}
+
+.card--compact .card-section-title {
+  font-size: clamp(0.34rem, calc(var(--card-width) * 0.065), 0.6rem);
+}
+
+.card--compact .area {
+  --area-font-size: clamp(0.38rem, calc(var(--card-width) * 0.068), 0.68rem);
+}
+
+.card--compact .area--long,
+.card--compact .area--xlong,
+.card--compact .area--xxlong {
+  --area-font-size: clamp(0.34rem, calc(var(--card-width) * 0.062), 0.6rem);
+}
+
+.card--compact .contribuicao {
+  --contribuicao-font-size: clamp(0.34rem, calc(var(--card-width) * 0.058), 0.54rem);
+  line-height: 1.16;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.card--compact .contribuicao--long,
+.card--compact .contribuicao--xlong,
+.card--compact .contribuicao--xxlong {
+  --contribuicao-font-size: clamp(0.3rem, calc(var(--card-width) * 0.052), 0.48rem);
 }
 
 .contribuicao--empty {
@@ -293,35 +431,41 @@ const illustrationFallback = computed(() =>
 
 .year-ribbon {
   position: relative;
-  min-width: clamp(74px, calc(var(--card-width) * 0.46), 92px);
-  padding: clamp(3px, 0.6vw, 4px) clamp(10px, 1vw, 14px) clamp(4px, 0.7vw, 5px);
+  min-width: clamp(42px, calc(var(--card-width) * 0.62), 92px);
+  padding: clamp(2px, calc(var(--card-height) * 0.012), 4px)
+    clamp(8px, calc(var(--card-width) * 0.08), 14px)
+    clamp(3px, calc(var(--card-height) * 0.015), 5px);
   background: linear-gradient(180deg, #f46ea9 0%, var(--card-ribbon) 100%);
   color: #fff;
   font-family: 'Arial Black', 'Impact', sans-serif;
-  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  font-size: clamp(0.54rem, calc(var(--card-width) * 0.092), 0.92rem);
   line-height: 1;
   letter-spacing: 0.04em;
   text-align: center;
-  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%);
-  box-shadow: 0 4px 0 var(--card-ribbon-shadow);
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0 50%);
+  box-shadow: 0 3px 0 var(--card-ribbon-shadow);
+}
+
+.card--compact .year-ribbon {
+  font-size: clamp(0.4rem, calc(var(--card-width) * 0.08), 0.74rem);
 }
 
 .year-ribbon::before,
 .year-ribbon::after {
   content: '';
   position: absolute;
-  bottom: -7px;
-  border-top: 8px solid var(--card-ribbon-shadow);
+  bottom: -5px;
+  border-top: 6px solid var(--card-ribbon-shadow);
   border-bottom: 0;
 }
 
 .year-ribbon::before {
-  left: 8px;
-  border-right: 8px solid transparent;
+  left: 6px;
+  border-right: 6px solid transparent;
 }
 
 .year-ribbon::after {
-  right: 8px;
-  border-left: 8px solid transparent;
+  right: 6px;
+  border-left: 6px solid transparent;
 }
 </style>

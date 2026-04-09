@@ -195,10 +195,10 @@ function endBoardPointerPan(event: PointerEvent) {
           @pointercancel="endBoardPointerPan"
           @pointerleave="endBoardPointerPan"
         >
-          <DropZone :index="0" />
+          <DropZone :index="0" :compact="true" />
           <template v-for="(card, index) in board" :key="card.id">
-            <ScientistCard :card="card" :showYear="true" :draggable="false" />
-            <DropZone :index="index + 1" />
+            <ScientistCard :card="card" :showYear="true" :draggable="false" :compact="true" />
+            <DropZone :index="index + 1" :compact="true" />
           </template>
         </div>
       </section>

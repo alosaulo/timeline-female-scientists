@@ -1,14 +1,26 @@
 :root {
-  --page-gutter: clamp(12px, 3vw, 32px);
-  --section-gap: clamp(20px, 4vw, 40px);
-  --card-gap: clamp(8px, 1.4vw, 12px);
-  --card-width: clamp(136px, 18vw, 200px);
-  --card-height: clamp(252px, 32vw, 360px);
+  --page-gutter: clamp(8px, 1.4vw, 18px);
+  --section-gap: clamp(6px, 1vh, 14px);
+  --card-gap: clamp(4px, 0.7vw, 10px);
+  --row-padding: clamp(2px, 0.5vh, 6px);
+  --card-width-ratio: 14;
+  --card-height-ratio: 26.5;
+  --hand-card-width-fluid: min(30vw, 24dvh);
+  --card-width: clamp(108px, var(--hand-card-width-fluid), 184px);
+  --card-height: calc(var(--card-width) * var(--card-height-ratio) / var(--card-width-ratio));
+  --drop-zone-width: clamp(18px, calc(var(--card-width) * 0.18), 28px);
+  --timeline-card-scale: 0.84;
+  --timeline-card-width: calc(var(--card-width) * var(--timeline-card-scale));
+  --timeline-card-height: calc(
+    var(--timeline-card-width) * var(--card-height-ratio) / var(--card-width-ratio)
+  );
+  --timeline-drop-zone-width: clamp(14px, calc(var(--timeline-card-width) * 0.2), 22px);
 }
 
 html {
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
 }
 
 *,
@@ -19,30 +31,74 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
   background: linear-gradient(180deg, #eef2ff 0%, #f9fbff 100%);
   color: #1f2240;
+  overflow: hidden;
 }
 
 #app {
-  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
+}
+
+.orientation-lock {
+  display: none;
+  position: fixed;
+  inset: 0;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top, rgba(162, 183, 255, 0.45), transparent 40%),
+    linear-gradient(180deg, #eef2ff 0%, #f9fbff 100%);
+  color: #1f2240;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.orientation-lock h2,
+.orientation-lock p {
+  margin: 0;
+}
+
+.orientation-lock h2 {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.orientation-lock p {
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  max-width: 24rem;
+  line-height: 1.4;
 }
 
 main {
   width: min(100%, 1440px);
+  height: 100%;
   margin: 0 auto;
   padding: var(--page-gutter);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--section-gap);
+  overflow: hidden;
 }
 
 main > h1 {
-  margin: 0 0 clamp(20px, 3vw, 32px);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin: 0;
+  font-size: clamp(1.05rem, 2.4vw, 2rem);
   line-height: 1.1;
 }
 
+section {
+  min-height: 0;
+}
+
 section h2 {
-  margin: 0 0 8px;
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  margin: 0 0 clamp(2px, 0.5vh, 6px);
+  font-size: clamp(0.88rem, 1.5vw, 1.15rem);
+  line-height: 1.05;
 }
 
 .cards,
@@ -50,20 +106,35 @@ section h2 {
 .hand {
   display: flex;
   gap: var(--card-gap);
-  padding: clamp(12px, 2vw, 20px) 0;
-  min-height: calc(var(--card-height) + 24px);
+  padding: var(--row-padding) 0;
+  min-height: 0;
 }
 
 .board {
   justify-content: center;
 }
 
-.cards,
-.hand {
+.cards {
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
   overflow: visible;
+}
+
+.hand {
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.hand > .card {
+  height: 100%;
+  width: auto;
+  flex: 0 0 auto;
+  aspect-ratio: var(--card-width-ratio) / var(--card-height-ratio);
 }
 
 .board {
@@ -71,7 +142,7 @@ section h2 {
   align-items: stretch;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: clamp(16px, 2vw, 24px);
+  padding-bottom: calc(var(--row-padding) + 4px);
   cursor: grab;
   user-select: none;
   scroll-snap-type: x proximity;
@@ -81,33 +152,60 @@ section h2 {
   scroll-snap-align: start;
 }
 
+.board > *,
+.hand > * {
+  flex-shrink: 0;
+}
+
 .board--panning {
   cursor: grabbing;
 }
 
 .game-area {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
   gap: var(--section-gap);
+  min-height: 0;
+  overflow: hidden;
 }
 
 .score-section,
 .timeline-section,
 .hand-section {
   width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.timeline-section {
+  flex: 0 0 auto;
+}
+
+.timeline-section .board {
+  padding-top: 0;
+  padding-bottom: clamp(2px, 0.4vh, 6px);
+}
+
+.score-section {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px 12px;
 }
 
 .score-section h2 {
-  margin: 0 0 8px 0;
+  margin: 0;
 }
 
 .score-board {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 20px;
-  padding: clamp(12px, 2vw, 16px);
+  gap: 6px 12px;
+  padding: clamp(8px, 1vh, 12px) clamp(10px, 1vw, 14px);
   border: 1px solid #d6d6f0;
-  border-radius: 16px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(8px);
 }
@@ -115,7 +213,7 @@ section h2 {
 .score-board p {
   margin: 0;
   color: #333;
-  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+  font-size: clamp(0.72rem, 1vw, 0.88rem);
 }
 
 .score-main {
@@ -125,8 +223,8 @@ section h2 {
 .card {
   flex: 0 0 var(--card-width);
   width: var(--card-width);
-  min-height: var(--card-height);
-  height: auto;
+  min-height: 0;
+  height: var(--card-height);
   padding: 16px;
   border-radius: 12px;
   background: white;
@@ -206,36 +304,56 @@ section h2 {
 }
 
 .win-message {
+  margin: 0;
   font-size: clamp(1.1rem, 2.2vw, 1.5rem);
   color: #2e7d32;
   font-weight: bold;
   text-align: center;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 820px) {
+  .score-section {
+    grid-template-columns: 1fr;
+  }
+
+  .score-section h2 {
+    text-align: center;
+  }
+}
+
+@media (max-height: 760px) {
   :root {
-    --card-width: clamp(128px, 31vw, 168px);
-    --card-height: clamp(236px, 58vw, 320px);
+    --hand-card-width-fluid: min(26vw, 21dvh);
+    --card-width: clamp(100px, var(--hand-card-width-fluid), 160px);
   }
 
   .score-board {
-    gap: 10px 12px;
+    gap: 4px 10px;
   }
 }
 
 @media (max-width: 560px) {
   :root {
-    --card-width: clamp(124px, 42vw, 150px);
-    --card-height: clamp(228px, 72vw, 290px);
+    --page-gutter: 8px;
+    --hand-card-width-fluid: min(36vw, 23dvh);
+    --card-width: clamp(104px, var(--hand-card-width-fluid), 142px);
   }
 
-  main > h1,
-  section h2 {
+  main > h1 {
     text-align: center;
   }
 
-  .score-board {
-    flex-direction: column;
-    gap: 8px;
+  section h2 {
+    text-align: center;
+  }
+}
+
+@media (orientation: portrait) {
+  main {
+    display: none;
+  }
+
+  .orientation-lock {
+    display: flex;
   }
 }
