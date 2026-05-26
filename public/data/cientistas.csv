@@ -1,41 +1,41 @@
 ﻿id;nome;ano;area;contribuicao;ilustracao;
-1;Bertha Lutz;1919;Biologia;Ingressou no Museu Nacional pioneira na botânica e no voto feminino.;/Images/cientistas/bertha_lutz.png
-2;Nise da Silveira;1926;Psiquiatria;Única mulher a se formar em medicina em sua turma na Bahia.;/Images/cientistas/nise_silveira.png;
-3;Maria José Deane;1936;Parasitologia;Liderou expedições essenciais para o controle da malária no Brasil.;/Images/cientistas/maria_deane.png;
-4;Heloísa Alberto Torres;1937;Antropologia;Primeira mulher a assumir a direção do Museu Nacional (UFRJ).;/Images/cientistas/heloisa_torres.png;
-5;Enedina Alves Marques;1945;Engenharia;Primeira engenheira negra do país, trabalhou no Plano Elétrico do Paraná.;/Images/cientistas/enedina_marques.png
-6;Graziela Barroso;1946;Botânica;Primeira pesquisadora do Jardim Botânico do RJ, maior catalogadora de plantas.;/Images/icone_cientista.png
-7;Elisa Frota Pessoa;1949;Física;Uma das fundadoras do Centro Brasileiro de Pesquisas Físicas (CBPF).;/Images/icone_cientista.png;
-8;Marília Chaves Peixoto;1950;Matemática;Primeira brasileira eleita para a Academia Brasileira de Ciências.;/Images/icone_cientista.png;
-9;Alice Piffer Canabrava;1951;Economia;Primeira professora catedrática da USP, fundou a História Econômica.;/Images/icone_cientista.png
-10;Sonja Ashauer;1954;Física;Segunda brasileira doutora em física com tese orientada por Paul Dirac.;/Images/icone_cientista.png;
-11;Johanna Döbereiner;1961;Agronomia;Descobriu a fixação biológica de nitrogênio base da soja sustentável.;/Images/icone_cientista.png;
-12;Carolina Bori;1962;Psicologia;Liderou a luta pela regulamentação da profissão de psicólogo no país.;/Images/icone_cientista.png;
-13;Maria Isaura de Queiroz;1965;Sociologia;Publicou estudos clássicos sobre o messianismo e sociologia rural.;/Images/icone_cientista.png;
-14;Ruth Nussenzweig;1967;Imunologia;Descobriu o antígeno que viabilizou a primeira vacina contra a malária.;/Images/icone_cientista.png;
-15;Virginia Bicudo;1970;Sociologia;Pioneira nos estudos raciais no Brasil e primeira psicanalista não-médica.;/Images/icone_cientista.png;
-16;Niède Guidon;1973;Arqueologia;Iniciou escavações no Piauí sobre a presença humana antiga na América.;/Images/icone_cientista.png;
-17;Lélia Gonzalez;1975;Antropologia;Cofundadora do Movimento Negro Unificado, referência no feminismo negro.;/Images/icone_cientista.png
-18;Berta Ribeiro;1976;Etnologia;Especialista em tecnologia indígena, publicou A Arte do Trançado.;/Images/icone_cientista.png
-19;Mayana Zatz;1981;Genética;Fundou o centro de referência mundial em doenças neuromusculares.;/Images/icone_cientista.png;
-20;Rosaly Lopes;1985;Astronomia;Entrou para a NASA, descobriu o maior número de vulcões ativos no espaço.;/Images/icone_cientista.png
-21;Yvonne Mascarenhas;1986;Física;Pioneira da cristalografia de raios-X, fundou laboratório na USP.;/Images/icone_cientista.png
-22;Angelita Habr-Gama;1991;Medicina;Criou a técnica Wait and Watch para tratamento conservador de câncer.;/Images/icone_cientista.png;
-23;Nadja Lapa;1995;Física;Pesquisadora de destaque em fusão nuclear e física de plasmas.;/Images/icone_cientista.png;
-24;Duilia de Mello;1997;Astronomia;Descobriu a supernova 1997D e as bolhas azuis de estrelas.;/Images/icone_cientista.png;
-25;Glaci Zancan;1999;Bioquímica;Primeira mulher a presidir a Sociedade Brasileira para o Progresso da Ciência.;/Images/icone_cientista.png;
-26;Thaisa Bergmann;2003;Astrofísica;Provou que buracos negros supermassivos são comuns em galáxias.;/Images/icone_cientista.png;
-27;Marcia Barbosa;2004;Física;Venceu o prêmio L'Oréal-UNESCO por desvendar o movimento da água.;/Images/icone_cientista.png;
-28;Suzana Herculano-Houzel;2005;Neurociência;Criou o método que contou o número exato de neurônios no cérebro.;/Images/icone_cientista.png;
-29;Viviane Barbosa;2006;Eng. Química;Desenvolveu catalisador químico que reduz poluição industrial.;/Images/icone_cientista.png;
-30;Lygia da Veiga Pereira;2008;Genética;Criou a primeira linhagem de células-tronco embrionárias brasileiras.;/Images/icone_cientista.png;
-31;Vanderlan Bolzani;2008;Química;Primeira mulher a presidir a Sociedade Brasileira de Química.;/Images/icone_cientista.png;
-32;Helena Nader;2009;Biomedicina;Referência no estudo da heparina, atual presidente da ABC.;/Images/icone_cientista.png
-33;Fernanda De Felice;2011;Neurociência;Descobriu o elo entre o diabetes tipo 2 e o mal de Alzheimer.;/Images/icone_cientista.png;
-34;Alicia Kowaltowski;2012;Bioquímica;Revelou como o metabolismo celular afeta a longevidade humana.;/Images/icone_cientista.png;
-35;Adriana Neumann;2013;Matemática;Pesquisadora de destaque em probabilidade e modelos estocásticos.;/Images/icone_cientista.png;
-36;Zélia Ludwig;2014;Física;Atua em novos materiais e divulgação científica em comunidades.;/Images/icone_cientista.png;
-37;Marcelle Soares-Santos;2015;Física;Detectou luz de fusão de estrelas que geraram ondas gravitacionais.;/Images/icone_cientista.png;
-38;Tatiana Coelho de Sampaio;2016;Biologia Celular;Referência em regeneração de tecidos e lesões medulares na UFRJ.;/Images/icone_cientista.png;
-39;Jaqueline Goes;2020;Biomedicina;Coordenou o sequenciamento do genoma do coronavírus em 48 horas.;/Images/icone_cientista.png;
-40;Ethel Maciel;2023;Epidemiologia;Assumiu a Secretaria de Vigilância em Saúde, referência em tuberculose.;/Images/icone_cientista.png
+1;Bertha Lutz;1919;Biologia;Ingressou no Museu Nacional pioneira na botânica e no voto feminino.;Images/cientistas/bertha_lutz.png
+2;Nise da Silveira;1926;Psiquiatria;Única mulher a se formar em medicina em sua turma na Bahia.;Images/cientistas/nise_silveira.png;
+3;Maria José Deane;1936;Parasitologia;Liderou expedições essenciais para o controle da malária no Brasil.;Images/cientistas/maria_deane.png;
+4;Heloísa Alberto Torres;1937;Antropologia;Primeira mulher a assumir a direção do Museu Nacional (UFRJ).;Images/cientistas/heloisa_torres.png;
+5;Enedina Alves Marques;1945;Engenharia;Primeira engenheira negra do país, trabalhou no Plano Elétrico do Paraná.;Images/cientistas/enedina_marques.png
+6;Graziela Barroso;1946;Botânica;Primeira pesquisadora do Jardim Botânico do RJ, maior catalogadora de plantas.;Images/icone_cientista.png
+7;Elisa Frota Pessoa;1949;Física;Uma das fundadoras do Centro Brasileiro de Pesquisas Físicas (CBPF).;Images/icone_cientista.png;
+8;Marília Chaves Peixoto;1950;Matemática;Primeira brasileira eleita para a Academia Brasileira de Ciências.;Images/icone_cientista.png;
+9;Alice Piffer Canabrava;1951;Economia;Primeira professora catedrática da USP, fundou a História Econômica.;Images/icone_cientista.png
+10;Sonja Ashauer;1954;Física;Segunda brasileira doutora em física com tese orientada por Paul Dirac.;Images/icone_cientista.png;
+11;Johanna Döbereiner;1961;Agronomia;Descobriu a fixação biológica de nitrogênio base da soja sustentável.;Images/icone_cientista.png;
+12;Carolina Bori;1962;Psicologia;Liderou a luta pela regulamentação da profissão de psicólogo no país.;Images/icone_cientista.png;
+13;Maria Isaura de Queiroz;1965;Sociologia;Publicou estudos clássicos sobre o messianismo e sociologia rural.;Images/icone_cientista.png;
+14;Ruth Nussenzweig;1967;Imunologia;Descobriu o antígeno que viabilizou a primeira vacina contra a malária.;Images/icone_cientista.png;
+15;Virginia Bicudo;1970;Sociologia;Pioneira nos estudos raciais no Brasil e primeira psicanalista não-médica.;Images/icone_cientista.png;
+16;Niède Guidon;1973;Arqueologia;Iniciou escavações no Piauí sobre a presença humana antiga na América.;Images/icone_cientista.png;
+17;Lélia Gonzalez;1975;Antropologia;Cofundadora do Movimento Negro Unificado, referência no feminismo negro.;Images/icone_cientista.png
+18;Berta Ribeiro;1976;Etnologia;Especialista em tecnologia indígena, publicou A Arte do Trançado.;Images/icone_cientista.png
+19;Mayana Zatz;1981;Genética;Fundou o centro de referência mundial em doenças neuromusculares.;Images/icone_cientista.png;
+20;Rosaly Lopes;1985;Astronomia;Entrou para a NASA, descobriu o maior número de vulcões ativos no espaço.;Images/icone_cientista.png
+21;Yvonne Mascarenhas;1986;Física;Pioneira da cristalografia de raios-X, fundou laboratório na USP.;Images/icone_cientista.png
+22;Angelita Habr-Gama;1991;Medicina;Criou a técnica Wait and Watch para tratamento conservador de câncer.;Images/icone_cientista.png;
+23;Nadja Lapa;1995;Física;Pesquisadora de destaque em fusão nuclear e física de plasmas.;Images/icone_cientista.png;
+24;Duilia de Mello;1997;Astronomia;Descobriu a supernova 1997D e as bolhas azuis de estrelas.;Images/icone_cientista.png;
+25;Glaci Zancan;1999;Bioquímica;Primeira mulher a presidir a Sociedade Brasileira para o Progresso da Ciência.;Images/icone_cientista.png;
+26;Thaisa Bergmann;2003;Astrofísica;Provou que buracos negros supermassivos são comuns em galáxias.;Images/icone_cientista.png;
+27;Marcia Barbosa;2004;Física;Venceu o prêmio L'Oréal-UNESCO por desvendar o movimento da água.;Images/icone_cientista.png;
+28;Suzana Herculano-Houzel;2005;Neurociência;Criou o método que contou o número exato de neurônios no cérebro.;Images/icone_cientista.png;
+29;Viviane Barbosa;2006;Eng. Química;Desenvolveu catalisador químico que reduz poluição industrial.;Images/icone_cientista.png;
+30;Lygia da Veiga Pereira;2008;Genética;Criou a primeira linhagem de células-tronco embrionárias brasileiras.;Images/icone_cientista.png;
+31;Vanderlan Bolzani;2008;Química;Primeira mulher a presidir a Sociedade Brasileira de Química.;Images/icone_cientista.png;
+32;Helena Nader;2009;Biomedicina;Referência no estudo da heparina, atual presidente da ABC.;Images/icone_cientista.png
+33;Fernanda De Felice;2011;Neurociência;Descobriu o elo entre o diabetes tipo 2 e o mal de Alzheimer.;Images/icone_cientista.png;
+34;Alicia Kowaltowski;2012;Bioquímica;Revelou como o metabolismo celular afeta a longevidade humana.;Images/icone_cientista.png;
+35;Adriana Neumann;2013;Matemática;Pesquisadora de destaque em probabilidade e modelos estocásticos.;Images/icone_cientista.png;
+36;Zélia Ludwig;2014;Física;Atua em novos materiais e divulgação científica em comunidades.;Images/icone_cientista.png;
+37;Marcelle Soares-Santos;2015;Física;Detectou luz de fusão de estrelas que geraram ondas gravitacionais.;Images/icone_cientista.png;
+38;Tatiana Coelho de Sampaio;2016;Biologia Celular;Referência em regeneração de tecidos e lesões medulares na UFRJ.;Images/icone_cientista.png;
+39;Jaqueline Goes;2020;Biomedicina;Coordenou o sequenciamento do genoma do coronavírus em 48 horas.;Images/icone_cientista.png;
+40;Ethel Maciel;2023;Epidemiologia;Assumiu a Secretaria de Vigilância em Saúde, referência em tuberculose.;Images/icone_cientista.png
