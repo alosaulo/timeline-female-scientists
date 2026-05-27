@@ -62,7 +62,7 @@ function getTextClass(
 const nameClass = computed(() => getTextClass('name', props.card.nome, [18, 26, 34]))
 const areaClass = computed(() => getTextClass('area', props.card.area, [16, 24, 32]))
 const contributionClass = computed(() =>
-  getTextClass('contribuicao', props.card.contribuicao, [40, 55, 70]),
+  getTextClass('contribuicao', props.card.contribuicao, [52, 72, 92]),
 )
 </script>
 
@@ -141,7 +141,7 @@ const contributionClass = computed(() =>
   box-shadow: 0 6px 14px var(--card-shadow);
   gap: var(--card-inner-gap);
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
 }
 
@@ -151,8 +151,24 @@ const contributionClass = computed(() =>
 }
 
 .card--draggable {
+  position: relative;
+  z-index: 1;
   cursor: grab;
   background: linear-gradient(180deg, #b1c3ff 0%, #8da5ff 100%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card--draggable:not(.card--dragging):hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(19, 35, 112, 0.28);
+    z-index: 4;
+  }
+
+  .card--compact:not(.card--dragging):hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(19, 35, 112, 0.28);
+    z-index: 4;
+  }
 }
 
 .card-header,
@@ -345,7 +361,7 @@ const contributionClass = computed(() =>
 }
 
 .contribuicao {
-  --contribuicao-font-size: clamp(0.5rem, calc(var(--card-width) * 0.068), 0.82rem);
+  --contribuicao-font-size: clamp(0.9rem, calc(var(--card-width) * 0.076), 1rem);
 
   margin: 0;
   color: #1f2240;
@@ -363,15 +379,15 @@ const contributionClass = computed(() =>
 }
 
 .contribuicao--long {
-  --contribuicao-font-size: clamp(0.47rem, calc(var(--card-width) * 0.064), 0.76rem);
+  --contribuicao-font-size: clamp(0.68rem, calc(var(--card-width) * 0.068), 0.86rem);
 }
 
 .contribuicao--xlong {
-  --contribuicao-font-size: clamp(0.44rem, calc(var(--card-width) * 0.06), 0.68rem);
+  --contribuicao-font-size: clamp(0.58rem, calc(var(--card-width) * 0.062), 0.78rem);
 }
 
 .contribuicao--xxlong {
-  --contribuicao-font-size: clamp(0.4rem, calc(var(--card-width) * 0.056), 0.62rem);
+  --contribuicao-font-size: clamp(0.5rem, calc(var(--card-width) * 0.058), 0.68rem);
   line-clamp: 7;
   -webkit-line-clamp: 7;
 }
@@ -404,7 +420,7 @@ const contributionClass = computed(() =>
 }
 
 .card--compact .contribuicao {
-  --contribuicao-font-size: clamp(0.34rem, calc(var(--card-width) * 0.058), 0.54rem);
+  --contribuicao-font-size: clamp(0.42rem, calc(var(--card-width) * 0.064), 0.62rem);
   line-height: 1.16;
   line-clamp: 2;
   -webkit-line-clamp: 2;
@@ -413,7 +429,7 @@ const contributionClass = computed(() =>
 .card--compact .contribuicao--long,
 .card--compact .contribuicao--xlong,
 .card--compact .contribuicao--xxlong {
-  --contribuicao-font-size: clamp(0.3rem, calc(var(--card-width) * 0.052), 0.48rem);
+  --contribuicao-font-size: clamp(0.34rem, calc(var(--card-width) * 0.056), 0.54rem);
 }
 
 .contribuicao--empty {
@@ -450,22 +466,4 @@ const contributionClass = computed(() =>
   font-size: clamp(0.4rem, calc(var(--card-width) * 0.08), 0.74rem);
 }
 
-.year-ribbon::before,
-.year-ribbon::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  border-top: 6px solid var(--card-ribbon-shadow);
-  border-bottom: 0;
-}
-
-.year-ribbon::before {
-  left: 6px;
-  border-right: 6px solid transparent;
-}
-
-.year-ribbon::after {
-  right: 6px;
-  border-left: 6px solid transparent;
-}
 </style>

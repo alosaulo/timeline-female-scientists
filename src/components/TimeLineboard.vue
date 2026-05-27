@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, ref } from 'vue'
 import { DragDropProvider, type DragDropEventHandlers, DragOverlay } from '@dnd-kit/vue'
 import csvData from '../../public/data/cientistas.csv?raw'
 import ScientistCard from './ScientistCard.vue'
@@ -76,9 +76,14 @@ const boardElement = ref<HTMLElement | null>(null)
 const isPanningBoard = ref(false)
 const panStartX = ref(0)
 const initialScrollLeft = ref(0)
+const autoScrollVelocity = ref(0)
+const autoScrollRafId = ref<number | null>(null)
 const score = ref(0)
 const correctMoves = ref(0)
 const wrongMoves = ref(0)
+
+const AUTO_SCROLL_EDGE = 120
+const MAX_AUTO_SCROLL_SPEED = 18
 
 const totalMoves = computed(() => correctMoves.value + wrongMoves.value)
 const accuracy = computed(() => {
@@ -87,8 +92,94 @@ const accuracy = computed(() => {
 })
 
 type DragEndEvent = Parameters<NonNullable<DragDropEventHandlers['onDragEnd']>>[0]
+type DragMoveEvent = Parameters<NonNullable<DragDropEventHandlers['onDragMove']>>[0]
+
+function stopAutoScroll() {
+  autoScrollVelocity.value = 0
+
+  if (autoScrollRafId.value !== null) {
+    cancelAnimationFrame(autoScrollRafId.value)
+    autoScrollRafId.value = null
+  }
+}
+
+function runAutoScroll() {
+  const boardEl = boardElement.value
+
+  if (!boardEl || autoScrollVelocity.value === 0) {
+    autoScrollRafId.value = null
+    return
+  }
+
+  boardEl.scrollLeft += autoScrollVelocity.value
+  autoScrollRafId.value = requestAnimationFrame(runAutoScroll)
+}
+
+function ensureAutoScrollLoop() {
+  if (autoScrollRafId.value !== null || autoScrollVelocity.value === 0) return
+
+  autoScrollRafId.value = requestAnimationFrame(runAutoScroll)
+}
+
+function updateAutoScrollFromClientX(clientX: number) {
+  const boardEl = boardElement.value
+  if (!boardEl) return
+
+  const rect = boardEl.getBoundingClientRect()
+  const leftDistance = clientX - rect.left
+  const rightDistance = rect.right - clientX
+
+  let velocity = 0
+
+  if (leftDistance >= 0 && leftDistance < AUTO_SCROLL_EDGE) {
+    const intensity = (AUTO_SCROLL_EDGE - leftDistance) / AUTO_SCROLL_EDGE
+    velocity = -Math.max(1, Math.round(MAX_AUTO_SCROLL_SPEED * intensity))
+  } else if (rightDistance >= 0 && rightDistance < AUTO_SCROLL_EDGE) {
+    const intensity = (AUTO_SCROLL_EDGE - rightDistance) / AUTO_SCROLL_EDGE
+    velocity = Math.max(1, Math.round(MAX_AUTO_SCROLL_SPEED * intensity))
+  }
+
+  autoScrollVelocity.value = velocity
+
+  if (velocity === 0) {
+    stopAutoScroll()
+    return
+  }
+
+  ensureAutoScrollLoop()
+}
+
+function resolveClientXFromDragMove(event: DragMoveEvent): number | null {
+  if (event.nativeEvent instanceof MouseEvent || event.nativeEvent instanceof PointerEvent) {
+    return event.nativeEvent.clientX
+  }
+
+  if (event.nativeEvent instanceof TouchEvent) {
+    const touch = event.nativeEvent.touches[0] ?? event.nativeEvent.changedTouches[0]
+    if (touch) return touch.clientX
+  }
+
+  if (event.to?.x !== undefined) {
+    return event.to.x
+  }
+
+  return null
+}
+
+function handleDragMove(event: DragMoveEvent) {
+  const clientX = resolveClientXFromDragMove(event)
+
+  if (clientX === null) {
+    stopAutoScroll()
+    return
+  }
+
+  updateAutoScrollFromClientX(clientX)
+}
 
 function handleDragEnd(event: DragEndEvent) {
+  stopAutoScroll()
+
   if (event.canceled) return
 
   const { operation } = event
@@ -181,6 +272,10 @@ function endBoardPointerPan(event: PointerEvent) {
 
   isPanningBoard.value = false
 }
+
+onBeforeUnmount(() => {
+  stopAutoScroll()
+})
 
 </script>
 
@@ -359,10 +454,19 @@ function endBoardPointerPan(event: PointerEvent) {
 .modal-leave-to .modal-card {
   transform: scale(0.9) translateY(-10px);
 }
+
+.board-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--card-gap);
+  width: max-content;
+  min-width: 100%;
+  justify-content: center;
+}
 </style>
 
 <template>
-  <DragDropProvider @dragEnd="handleDragEnd">
+  <DragDropProvider @dragMove="handleDragMove" @dragEnd="handleDragEnd">
     <div class="game-area">
       <section class="score-section" aria-live="polite">
         <h2>Pontuacao</h2>
@@ -387,11 +491,13 @@ function endBoardPointerPan(event: PointerEvent) {
           @pointercancel="endBoardPointerPan"
           @pointerleave="endBoardPointerPan"
         >
-          <DropZone :index="0" :compact="true" />
-          <template v-for="(card, index) in board" :key="card.id">
-            <ScientistCard :card="card" :showYear="true" :draggable="false" :compact="true" />
-            <DropZone :index="index + 1" :compact="true" />
-          </template>
+          <div class="board-track">
+            <DropZone :index="0" :compact="true" />
+            <template v-for="(card, index) in board" :key="card.id">
+              <ScientistCard :card="card" :showYear="true" :draggable="false" :compact="true" />
+              <DropZone :index="index + 1" :compact="true" />
+            </template>
+          </div>
         </div>
       </section>
 

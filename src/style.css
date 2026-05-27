@@ -6,15 +6,15 @@
   --card-width-ratio: 14;
   --card-height-ratio: 26.5;
   --hand-card-width-fluid: min(30vw, 24dvh);
-  --card-width: clamp(108px, var(--hand-card-width-fluid), 184px);
-  --card-height: calc(var(--card-width) * var(--card-height-ratio) / var(--card-width-ratio));
+  --card-width: 250px;
+  --card-height: 450px;
   --drop-zone-width: clamp(18px, calc(var(--card-width) * 0.18), 28px);
   --timeline-card-scale: 0.84;
   --timeline-card-width: calc(var(--card-width) * var(--timeline-card-scale));
   --timeline-card-height: calc(
     var(--timeline-card-width) * var(--card-height-ratio) / var(--card-width-ratio)
   );
-  --timeline-drop-zone-width: clamp(14px, calc(var(--timeline-card-width) * 0.2), 22px);
+  --timeline-drop-zone-width: clamp(18px, calc(var(--timeline-card-width) * 0.22), 28px);
 }
 
 html {
@@ -111,7 +111,7 @@ section h2 {
 }
 
 .board {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .cards {
@@ -131,7 +131,7 @@ section h2 {
 }
 
 .hand > .card {
-  height: 100%;
+  height: 440px;
   width: auto;
   flex: 0 0 auto;
   aspect-ratio: var(--card-width-ratio) / var(--card-height-ratio);
@@ -140,8 +140,10 @@ section h2 {
 .board {
   position: relative;
   align-items: stretch;
+  justify-content: flex-start;
   overflow-x: auto;
   overflow-y: hidden;
+  padding-inline: var(--card-gap);
   padding-bottom: calc(var(--row-padding) + 4px);
   cursor: grab;
   user-select: none;
