@@ -84,7 +84,6 @@ const contributionClass = computed(() =>
 
     <div class="card-illustration">
       <div class="card-illustration__frame">
-        <div class="card-illustration__backdrop" aria-hidden="true"></div>
         <div class="card-ornament card-ornament--top" aria-hidden="true"></div>
         <div class="card-ornament card-ornament--bottom" aria-hidden="true"></div>
 
@@ -240,18 +239,6 @@ const contributionClass = computed(() =>
 
 .card--compact .card-illustration__frame {
   height: calc(var(--card-height) * 0.34);
-}
-
-.card-illustration__backdrop {
-  position: absolute;
-  top: clamp(6px, calc(var(--card-height) * 0.05), 14px);
-  left: 50%;
-  width: clamp(38px, calc(var(--card-width) * 0.62), 122px);
-  height: clamp(38px, calc(var(--card-width) * 0.62), 122px);
-  border-radius: 999px;
-  background: #6c87ea;
-  transform: translateX(-50%);
-  z-index: -2;
 }
 
 .card-ornament {
