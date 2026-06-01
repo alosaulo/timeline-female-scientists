@@ -140,7 +140,9 @@ const contributionClass = computed(() =>
   box-shadow: 0 6px 14px var(--card-shadow);
   gap: var(--card-inner-gap);
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   overflow: hidden;
 }
 
@@ -452,5 +454,4 @@ const contributionClass = computed(() =>
 .card--compact .year-ribbon {
   font-size: clamp(0.4rem, calc(var(--card-width) * 0.08), 0.74rem);
 }
-
 </style>
